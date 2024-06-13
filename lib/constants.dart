@@ -1,2 +1,2 @@
-const kFlutterInfo = 'Flutter 3.3.10 • channel stable • https://github.com/flutter/flutter.git\nFramework • revision 135454af32 (4 weeks ago) • 2022-12-15 07:36:55 -0800\nEngine • revision 3316dd8728\nTools • Dart 2.18.6 • DevTools 2.15.0\n';
-const kBuildDate = 1673636599152;
+const kFlutterInfo = 'Flutter 3.23.0-13.0.pre.189 • channel master • git@github.com:ditman/flutter-flutter.git\nFramework • revision 14df7be3f9 (35 hours ago) • 2024-06-11 11:14:54 -0400\nEngine • revision 1cdbebee19\nTools • Dart 3.5.0 (build 3.5.0-236.0.dev) • DevTools 2.36.0\n';
+const kBuildDate = 1718243110485;
