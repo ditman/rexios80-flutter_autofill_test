@@ -2,11 +2,20 @@ import 'package:autofill_test/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_time_ago/get_time_ago.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/link.dart';
 
 void main() {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  final String beforeUrl = Uri.base.replace(
+    fragment: null,
+    path: '/before',
+  ).toString();
+  final String afterUrl = Uri.base.replace(
+    fragment: null,
+    path: '/after',
+  ).toString();
 
   runApp(
     MaterialApp(
@@ -48,13 +57,13 @@ void main() {
                 'Built ${GetTimeAgo.parse(DateTime.fromMillisecondsSinceEpoch(kBuildDate))}\n',
               ),
               Row(
-                children: const [
-                  Text('View app built with Flutter channel'),
-                  LinkButton(label: 'stable', url: '../stable'),
+                children: [
+                  Text('View app built with #51009'),
+                  LinkButton(label: 'before', url: beforeUrl),
                   Text('/'),
-                  LinkButton(label: 'beta', url: '../beta'),
+                  LinkButton(label: 'after', url: afterUrl),
                   Text('/'),
-                  LinkButton(label: 'master', url: '../master'),
+                  LinkButton(label: 'PR', url: 'https://github.com/flutter/engine/pull/51009', target: LinkTarget.blank,),
                 ],
               ),
             ],
@@ -64,6 +73,7 @@ void main() {
               child: LinkButton(
                 label: 'View repository',
                 url: 'https://github.com/Rexios80/flutter_autofill_test',
+                target: LinkTarget.blank,
               ),
             ),
           ],
@@ -76,14 +86,21 @@ void main() {
 class LinkButton extends StatelessWidget {
   final String label;
   final String url;
+  final LinkTarget target;
 
-  const LinkButton({super.key, required this.label, required this.url});
+  const LinkButton({super.key, required this.label, required this.url, this.target = LinkTarget.self});
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => launchUrlString(url),
-      child: Text(label),
+    return Link(
+      builder:(context, followLink) {
+        return TextButton(
+          onPressed: followLink,
+          child: Text(label),
+        );
+      },
+      target: target,
+      uri: Uri.parse(url),
     );
   }
 }
