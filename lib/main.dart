@@ -8,14 +8,18 @@ void main() {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  final String beforeUrl = Uri.base.replace(
-    fragment: null,
-    path: '/before',
-  ).toString();
-  final String afterUrl = Uri.base.replace(
-    fragment: null,
-    path: '/after',
-  ).toString();
+  final beforeUrl = Uri.base
+      .replace(
+        fragment: null,
+        path: '/before',
+      )
+      .toString();
+  final afterUrl = Uri.base
+      .replace(
+        fragment: null,
+        path: '/after',
+      )
+      .toString();
 
   runApp(
     MaterialApp(
@@ -58,12 +62,16 @@ void main() {
               ),
               Row(
                 children: [
-                  Text('View app built with #51009'),
+                  const Text('View app built with #51009'),
                   LinkButton(label: 'before', url: beforeUrl),
-                  Text('/'),
+                  const Text('/'),
                   LinkButton(label: 'after', url: afterUrl),
-                  Text('/'),
-                  LinkButton(label: 'PR', url: 'https://github.com/flutter/engine/pull/51009', target: LinkTarget.blank,),
+                  const Text('/'),
+                  const LinkButton(
+                    label: 'PR',
+                    url: 'https://github.com/flutter/engine/pull/51009',
+                    target: LinkTarget.blank,
+                  ),
                 ],
               ),
             ],
@@ -88,12 +96,17 @@ class LinkButton extends StatelessWidget {
   final String url;
   final LinkTarget target;
 
-  const LinkButton({super.key, required this.label, required this.url, this.target = LinkTarget.self});
+  const LinkButton({
+    super.key,
+    required this.label,
+    required this.url,
+    this.target = LinkTarget.self,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Link(
-      builder:(context, followLink) {
+      builder: (context, followLink) {
         return TextButton(
           onPressed: followLink,
           child: Text(label),
